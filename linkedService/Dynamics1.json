@@ -1,0 +1,15 @@
+{
+	"name": "Dynamics1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Dynamics",
+		"typeProperties": {
+			"deploymentType": "Online",
+			"serviceUri": "https://M365x09293052.crm.dynamics.com",
+			"authenticationType": "Office365",
+			"username": "admin@M365x09293052.onmicrosoft.com",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDBGNUNDRTVDLTM5NEUtNEE2NS1BMzk3LTM2MUI1NUE0MTI2RF8zZjE4OWM0Ny00OGRiLTQ3YjQtOGU1Ni01ODM0ODNhNjdjNTMiDQp9"
+		}
+	}
+}
