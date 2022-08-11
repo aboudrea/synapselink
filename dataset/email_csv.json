@@ -14,7 +14,10 @@
 					"value": "@concat(formatDatetime(utcnow(),'yyyy-MM'),'.csv')",
 					"type": "Expression"
 				},
-				"folderPath": "email",
+				"folderPath": {
+					"value": "@concat('email/',utcNow())",
+					"type": "Expression"
+				},
 				"fileSystem": "email"
 			},
 			"columnDelimiter": ",",
