@@ -15,7 +15,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat('email/',utcNow())",
+					"value": "@concat(utcNow(),'email/')",
 					"type": "Expression"
 				},
 				"fileSystem": "email"
