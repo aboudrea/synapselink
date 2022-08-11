@@ -15,7 +15,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat(formatDatetime(utcNow(),'yyyy-MM-ddhh:mm:ss'),'email','/')",
+					"value": "@concat(formatDatetime(utcNow(),'yyyy-MM-dd'),'T',formatDatetime(utcNow(),'hh-mm-ss'),'Z','/','email','/')",
 					"type": "Expression"
 				},
 				"fileSystem": "email"
