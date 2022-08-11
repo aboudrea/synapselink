@@ -1,0 +1,188 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "synapselink"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"Dynamics1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Dynamics1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://lulusynapselink.dfs.core.windows.net/"
+		},
+		"Dynamics1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "admin@M365x09293052.onmicrosoft.com"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/export-email')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Email",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DynamicsSource",
+								"query": "<fetch mapping='logical'> \n   <entity name='email'>\n      <attribute name='activityid'/> \n      <attribute name='statecode'/> \n      <attribute name='statuscode'/> \n      <attribute name='deliveryprioritycode'/>\n      <attribute name='emailremindertype'/>\n      <attribute name='prioritycode'/>\n      <attribute name='notifications'/>\n      <attribute name='emailreminderstatus'/>\n      <attribute name='correlationmethod'/>\n      <attribute name='isemailreminderset'/>\n      <attribute name='compressed'/>\n      <attribute name='directioncode'/>\n      <attribute name='isworkflowcreated'/>\n      <attribute name='isregularactivity'/>\n      <attribute name='deliveryreceiptrequested'/>\n      <attribute name='isbilled'/>\n      <attribute name='readreceiptrequested'/>\n      <attribute name='isemailfollowed'/>\n      <attribute name='owninguser'/>\n      <attribute name='serviceid'/>\n      <attribute name='owningteam'/>\n      <attribute name='modifiedonbehalfby'/>\n      <attribute name='sendermailboxid'/>\n      <attribute name='slainvokedid'/>\n      <attribute name='parentactivityid'/>\n      <attribute name='acceptingentityid'/>\n      <attribute name='modifiedby'/>\n      <attribute name='regardingobjectid'/>\n      <attribute name='slaid'/>\n      <attribute name='createdby'/>\n      <attribute name='sendersaccount'/>\n      <attribute name='correlatedactivityid'/>\n      <attribute name='emailsender'/>\n      <attribute name='owningbusinessunit'/>\n      <attribute name='templateid'/>\n      <attribute name='receivingmailboxid'/>\n      <attribute name='createdonbehalfby'/>\n      <attribute name='ownerid'/>\n<attribute name='sendermailboxidname'/>\n      <attribute name='importsequencenumber'/>\n      <attribute name='msdyn_recipientlist'/>\n      <attribute name='postponeemailprocessinguntil'/>\n      <attribute name='regardingobjecttypecode'/>\n      <attribute name='scheduleddurationminutes'/>\n      <attribute name='descriptionblobid_name'/>\n      <attribute name='emailtrackingid'/>\n      <attribute name='reminderactioncardid'/>\n      <attribute name='emailsenderobjecttypecode'/>\n      <attribute name='owneridname'/>\n      <attribute name='parentactivityidname'/>\n      <attribute name='emailsenderyominame'/>\n      <attribute name='acceptingentitytypecode'/>\n      <attribute name='acceptingentityidname'/>\n      <attribute name='createdonbehalfbyname'/>\n      <attribute name='correlatedactivityidname'/>\n      <attribute name='senton'/>\n      <attribute name='linksclickedcount'/>\n      <attribute name='emailsendername'/>\n      <attribute name='slainvokedidname'/>\n      <attribute name='createdbyname'/>\n      <attribute name='modifiedbyname'/>\n      <attribute name='activityadditionalparams'/>\n      <attribute name='descriptionblobid'/>\n      <attribute name='attachmentcount'/>\n      <attribute name='subject'/>\n      <attribute name='category'/>\n      <attribute name='safedescription'/>\n      <attribute name='createdon'/>\n      <attribute name='versionnumber'/>\n      <attribute name='subcategory'/>\n      <attribute name='delayedemailsendtime'/>\n      <attribute name='regardingobjectidyominame'/>\n      <attribute name='slaname'/>\n      <attribute name='mimetype'/>\n      <attribute name='exchangerate'/>\n      <attribute name='modifiedonbehalfbyname'/>\n      <attribute name='templateidname'/>\n      <attribute name='transactioncurrencyidname'/>\n      <attribute name='scheduledstart'/>\n      <attribute name='emailremindertext'/>\n      <attribute name='submittedby'/>\n      <attribute name='overriddencreatedon'/>\n      <attribute name='regardingobjectidname'/>\n      <attribute name='isunsafe'/>\n      <attribute name='utcconversiontimezonecode'/>\n      <attribute name='attachmentopencount'/>\n      <attribute name='createdonbehalfbyyominame'/>\n      <attribute name='deliveryattempts'/>\n      <attribute name='emailreminderexpirytime'/>\n      <attribute name='actualdurationminutes'/>\n      <attribute name='sortdate'/>\n      <attribute name='onholdtime'/>\n      <attribute name='timezoneruleversionnumber'/>\n      <attribute name='actualstart'/>\n      <attribute name='replycount'/>\n      <attribute name='conversationtrackingid'/>\n      <attribute name='sender'/>\n      <attribute name='owneridyominame'/>\n      <attribute name='createdbyyominame'/>\n      <attribute name='sendersaccountobjecttypecode'/>\n      <attribute name='receivingmailboxidname'/>\n      <attribute name='owningbusinessunitname'/>\n      <attribute name='lastopenedtime'/>\n      <attribute name='description'/>\n      <attribute name='modifiedon'/>\n      <attribute name='modifiedbyyominame'/>\n      <attribute name='stageid'/>\n      <attribute name='modifiedonbehalfbyyominame'/>\n      <attribute name='reservedforinternaluse'/>\n      <attribute name='activitytypecode'/>\n      <attribute name='lastonholdtime'/>\n      <attribute name='actualend'/>\n      <attribute name='inreplyto'/>\n      <attribute name='sendersaccountyominame'/>\n      <attribute name='scheduledend'/>\n      <attribute name='traversedpath'/>\n      <attribute name='baseconversationindexhash'/>\n      <attribute name='messageid'/>      \n      <attribute name='opencount'/>\n</entity>\n</fetch>"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DynamicsEmail",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "email_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-08-10T21:56:13Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DynamicsEmail')]",
+				"[concat(variables('factoryId'), '/datasets/email_csv')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsEmail')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dynamics1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "email"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dynamics1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/email_csv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(formatDatetime(utcnow(),'yyyy-MM'),'.csv')",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat('email/',utcNow())",
+							"type": "Expression"
+						},
+						"fileSystem": "email"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Dynamics1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Dynamics",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://M365x09293052.crm.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('Dynamics1_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Dynamics1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

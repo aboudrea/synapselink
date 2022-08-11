@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "synapselink"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"Dynamics1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://lulusynapselink.dfs.core.windows.net/"
+		},
+		"Dynamics1_properties_typeProperties_username": {
+			"value": "admin@M365x09293052.onmicrosoft.com"
+		}
+	}
+}
